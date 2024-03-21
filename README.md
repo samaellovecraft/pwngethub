@@ -21,7 +21,7 @@ The idea of this repo is for me to make a valuable commit to my personal growth 
     - **Clue**: can be fixed with `git init` (awful)
     - **Explanation**: [code](https://github.com/neovim/nvim-lspconfig/blob/master/lua/lspconfig/server_configurations/asm_lsp.lua) -> `root_dir = util.find_git_ancestor` (it's noticeable that other lsp servers have different implementations) 
     - **Fix**: fixed by (link to my config):
-```lua
-lspconfig.asm_lsp.setup({ capabilities = capabilities, root_dir = require('lspconfig.util').root_pattern('.asm-lsp.toml', '.git', '*.asm', '*.s', '*.S') })` 
-```
+    ```lua
+    lspconfig.asm_lsp.setup({ capabilities = capabilities, root_dir = require('lspconfig.util').root_pattern('.asm-lsp.toml', '.git', '*.asm', '*.s', '*.S') })` 
+    ```
 
