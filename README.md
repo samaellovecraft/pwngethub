@@ -25,3 +25,6 @@ test
     ```lua
     lspconfig.asm_lsp.setup({ root_dir = require('lspconfig.util').root_pattern('.asm-lsp.toml', '.git', '*.asm', '*.s', '*.S') })
     ```
+
+
+see [ex06](exploit)
