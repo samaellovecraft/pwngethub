@@ -26,6 +26,8 @@ see [test](test/)
     lspconfig.asm_lsp.setup({ root_dir = require('lspconfig.util').root_pattern('.asm-lsp.toml', '.git', '*.asm', '*.s', '*.S') })
     ```
 
+> [!NOTE] TEST
+> teste
 
 # Intro to x86 Assembly
 
