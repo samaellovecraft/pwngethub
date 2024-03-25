@@ -2,7 +2,7 @@
 
 The idea of this repo is for me to make a valuable commit to my personal growth and future (ideally) every day.
 
-test 
+see [test](test/) 
 ## Mastering NeoVim
 
 - vim motions:
