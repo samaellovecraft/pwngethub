@@ -30,7 +30,14 @@ test
 see [ex06](exploit)
 
 > [!NOTE]
-> the object file for this excercise should be linked with `gcc` since it's using C function:
+> the object file for this excercise should be linked with `gcc` because it's easier to include C standard lib with it:
 > ```bash
 > gcc -m32 ex10.o -o ex10
 > ```
+> also you will probably have to install the 32-bit development packages:
+> ```bash
+> sudo apt install gcc-multilib
+> ```
+
+> [!IMPORTANT]
+> since the caller pushes the args onto the stack, it's also their responsibility to remove them from the stack when the call is done
