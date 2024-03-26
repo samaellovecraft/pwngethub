@@ -243,10 +243,11 @@ times2:
     ret
 ```
 
-> Explaining `[ebp+8]`:
->     1. the old `ebp` is pushed onto the stack (`push ebp`)>>     2. the function call itself (`call times2`) pushes the return address onto the stack
->     3. that's two 4-byte integers on the stack
->     4. therefore, the argument is located at 8 bytes beyond the base pointer
+Explaining `[ebp+8]`:
+     1. the old `ebp` is pushed onto the stack (`push ebp`)
+     2. the function call itself (`call times2`) pushes the return address onto the stack
+     3. that's two 4-byte integers on the stack
+     4. therefore, the argument is located at 8 bytes beyond the base pointer
 
 ### Using external functions
 
