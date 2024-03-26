@@ -1,24 +1,44 @@
 # Intro to x86 Assembly
 
-[yt playlist](https://www.youtube.com/watch?list=PLmxT2pVYo5LB5EzTPZGfFN0c2GDiSXgQe)
+[youtube playlist](https://www.youtube.com/watch?list=PLmxT2pVYo5LB5EzTPZGfFN0c2GDiSXgQe)
+
+## Utils
+
+use `nasm` to assemble the program into machine code:
+```bash
+nasm -f elf32 ex01.asm -o ex01.o
+```
+use `ld` (linker) to build an executable from the object file:
+```bash
+ld -m elf_i386 ex01.o -o ex01
+```
+or use a custom [Makefile](Makefile):
+```bash
+make FILE=ex01/ex01.asm
+```
+
+## `global` directive
 
 the `global` keyword is used to make an *identifier* accessible to the linker:
 ```asm
 global _start
 ```
-the identifier followed by a `:` will create a *label*; labels are used to name locations in the code
+
+## Labels
+
+the identifier followed by a `:` will create a *label*; labels are used to name locations in the code:
 ```asm
 _start: ; program's entry point
 ```
 
-## mov
+## `mov` instruction
 
 ```asm
 mov eax, 1 ; moves int 1 into `eax` register
 mov ebx, 42 ; moves int 42 into `ebx` register
 ```
 
-## int
+## Interrupts
 
 ```asm
 int 0x80 ; performs an interrupt
@@ -27,14 +47,14 @@ int 0x80 ; performs an interrupt
 - the system call that it makes will be determined by `eax` register (e.g., the value 1 is a `sys_exit` system call)
 - the value stored in `ebx` will be the exit status for the program
 
-## eax
+## EAX
 
 ```asm
 mov eax, 4      ; `sys_write` sys call
 mov eax, 1      ; `sys_exit` system call
 ```
 
-## ebx
+## EBX
 
 ```asm
 mov ebx, 1      ; `stdout` file descriptor
@@ -50,21 +70,6 @@ add ebx, ecx ; ebx += ecx
 sub ebx, edx ; ebx -= edx
 mul ebx      ; eax *= ebx
 div edx      ; eax /= edx
-```
-
-## Utils
-
-use `nasm` to assemble the program into machine code:
-```bash
-nasm -f elf32 ex01.asm -o ex01.o
-```
-use `ld` (linker) to build an executable from the object file:
-```bash
-ld -m elf_i386 ex01.o -o ex01
-```
-or use a custom [Makefile](Makefile):
-```bash
-make FILE=ex01/ex01.asm
 ```
 
 ## Instruction Pointer (EIP)
@@ -129,12 +134,12 @@ mov eax, dword [esp]    ; these operations are the equivalent of:
 add esp, 4              ; pop eax
 ```
 
-## Function-like functionality with `call`
+## Function-like functionality with `call` instruction
 
 - pushes EIP to stack
 - performs a jump (advantage over a simple jump: you don't have to hardcode the location to return to)
 
-```
+```asm
 global _start
 
 _start:
@@ -148,7 +153,7 @@ func:
     jmp eax     ; jumps to instruction stored in `eax`
 ```
 
-### `ret`
+### `ret` instruction
 
 this code is equivalent to the code above:
 ```asm
@@ -221,7 +226,7 @@ func:
 
 ### Passing values to and returning them from functions
 
-see [ex09](ex09/ex09.asm)
+(see [ex09](ex09/ex09.asm))
 
 ```asm
 global _start
@@ -251,10 +256,10 @@ Explaining `[ebp+8]`:
 
 ### Using external functions
 
-see [ex10](ex10/ex10.asm)
+(see [ex10](ex10/ex10.asm))
 
 > [!NOTE]
-> the object file for this excercise should be linked with `gcc` because it's easier to include C standard lib with it:
+> the object file for this excercise should be linked with `gcc` because it's easier to include C standard libs with it:
 > ```bash
 > gcc -m32 ex10.o -o ex10
 > ```
@@ -284,11 +289,11 @@ main:
 ```
 
 > [!IMPORTANT]
-> since the caller pushes the args onto the stack, it's also their responsibility to remove them from the stack when the call is done (beware: the `call` instruction wont do this for you and if you make too many calls without popping them you will grow the stack quite a bit which will use up more memory than is needed)
+> since the caller pushes the args onto the stack, it's also their responsibility to remove them from the stack when the call is done (beware: the `call` instruction won't do this for you and if you make too many calls without popping them you will grow the stack quite a bit which will use up more memory than is needed)
 
 ## Create a function in assembly that can be called from a C program
 
-see [ex11](ex11/)
+(see [ex11](ex11/))
 
 the function in question:
 ```asm
