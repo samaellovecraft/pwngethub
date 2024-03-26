@@ -174,6 +174,7 @@ add esp, 4              ; pop eax
 - pushes EIP to stack
 - performs a jump (advantage over a simple jump: you don't have to hardcode the location to return to)
 
+see ex06
 ```asm
 global _start
 
