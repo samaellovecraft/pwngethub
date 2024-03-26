@@ -40,7 +40,7 @@ mov eax, 1 ; moves int 1 into `eax` register
 mov ebx, 42 ; moves int 42 into `ebx` register
 ```
 
-### Interrupts
+## Interrupts
 
 ```asm
 int 0x80 ; performs an interrupt
@@ -49,14 +49,14 @@ int 0x80 ; performs an interrupt
 - the system call that it makes will be determined by `eax` register (e.g., the value 1 is a `sys_exit` system call)
 - the value stored in `ebx` will be the exit status for the program
 
-### EAX
+## EAX
 
 ```asm
 mov eax, 4      ; `sys_write` sys call
 mov eax, 1      ; `sys_exit` system call
 ```
 
-### EBX
+## EBX
 
 ```asm
 mov ebx, 1      ; `stdout` file descriptor
