@@ -174,7 +174,7 @@ add esp, 4              ; pop eax
 - pushes EIP to stack
 - performs a jump (advantage over a simple jump: you don't have to hardcode the location to return to)
 
-see ex06
+(see [ex07](ex07/ex07.asm))
 ```asm
 global _start
 
@@ -190,6 +190,8 @@ func:
 ```
 
 ### `ret` instruction
+
+(see [ex07_ret](ex07/ex07_ret.asm))
 
 this code is equivalent to the code above:
 ```asm
@@ -207,6 +209,7 @@ func:
 
 ### Preserving the stack with EBP
 
+(see [ex08](ex08/ex08.asm))
 ```asm
 global _start
 
@@ -231,7 +234,7 @@ func:
 ```
 
 > [!IMPORTANT]
-> if the `func` were to call another fucntion that stores the value of `esp` in `ebp` (`mov ebp, esp`), it would alter the previous value of `ebp`. thus, taking away the ability to restore the state of the stack to its original state before the `func` call.
+> if the `func` were to call another fucntion that stores the value of `esp` in `ebp` (`mov ebp, esp`), it would alter the previous value of `ebp`. thus, taking away the ability to restore the state of the stack to its original state before the `func` call
 
 Here's a common technique to circumvent that:
 ```asm
@@ -329,7 +332,7 @@ main:
 
 ## Create a function in assembly that can be called from a C program
 
-(see [ex11](ex11/))
+(see [ex11](ex11/ex11.asm))
 
 the function in question:
 ```asm
