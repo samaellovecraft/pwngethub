@@ -17,7 +17,29 @@ or use a custom [Makefile](Makefile):
 make FILE=ex01/ex01.asm
 ```
 
+## Registers
+
+- working memory of the CPU
+- there are *general purpose* and *special purpose* registers
+- the size of the registers is reflected by the CPU architecture (32bit/64bit)
+
+### EAX
+
+```asm
+mov eax, 4      ; `sys_write` sys call
+mov eax, 1      ; `sys_exit` system call
+```
+
+### EBX
+
+```asm
+mov ebx, 1      ; `stdout` file descriptor
+mov ebx, 0      ; exit status is 0
+```
+
 ## Basic Syntax
+
+(see [ex01](ex01/ex01.asm))
 
 ### `global` directive
 
@@ -49,21 +71,7 @@ int 0x80 ; performs an interrupt
 - the system call that it makes will be determined by `eax` register (e.g., the value 1 is a `sys_exit` system call)
 - the value stored in `ebx` will be the exit status for the program
 
-### EAX
-
-```asm
-mov eax, 4      ; `sys_write` sys call
-mov eax, 1      ; `sys_exit` system call
-```
-
-### EBX
-
-```asm
-mov ebx, 1      ; `stdout` file descriptor
-mov ebx, 0      ; exit status is 0
-```
-
-## Math
+## Common Ops
 
 ```asm
 mov ebx, 123 ; ebx = 123
@@ -72,6 +80,31 @@ add ebx, ecx ; ebx += ecx
 sub ebx, edx ; ebx -= edx
 mul ebx      ; eax *= ebx
 div edx      ; eax /= edx
+```
+
+## Hello World (printing data to `stdout`)
+
+(see [ex02](ex02/ex02.asm))
+
+```asm
+global _start
+
+section .data
+    ; string of bytes:
+    msg db "Hello, world!", 0x0a ; <- \n
+    ; calculate the length of the string:
+    len equ $ - msg ; subtract the location of the start of the string (`msg`) from the location after the string (`$`)
+
+section .text
+_start:
+    mov eax, 4      ; `sys_write` system call
+    mov ebx, 1      ; `stdout` file descriptor
+    mov ecx, msg    ; bytes to write
+    mov edx, len    ; number of bites to write
+    int 0x80        ; perform system call
+    mov eax, 1      ; `sys_exit` system call
+    mov ebx, 0      ; exit status is 0
+    int 0x80
 ```
 
 ## Instruction Pointer (EIP)
@@ -92,7 +125,7 @@ jle A, B    ; jump of less or equal
 ```
 
 > [!IMPORTANT]
-> jump ops introduce conditional statements (see [ex03](ex03/ex03_condition.asm)) and loops (see [ex04](ex04/ex04.asm)).
+> jump ops introduce conditional statements (see [ex03](ex03/ex03_condition.asm)) and loops (see [ex04](ex04/ex04.asm))
 
 ## Common Data Types
 
@@ -125,7 +158,7 @@ mov [esp], dword 357    ; push 357
 ```
 
 > [!NOTE]
-> `sub esp, 4` effectively allocates 4 bytes on the stack.
+> `sub esp, 4` effectively allocates 4 bytes on the stack
 
 ```asm
 push 1234
