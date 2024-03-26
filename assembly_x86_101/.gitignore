@@ -1,0 +1,12 @@
+# Ignore all
+*
+
+# Unignore directories, .gitignore, .toml, .asm, .c, .md, and Makefiles
+!*/
+!.gitignore
+!*.toml
+!*.asm
+!*.c
+!*.h
+!*.md
+!Makefile
