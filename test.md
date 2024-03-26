@@ -17,28 +17,30 @@ or use a custom [Makefile](Makefile):
 make FILE=ex01/ex01.asm
 ```
 
-## `global` directive
+## Basic Syntax
+
+### `global` directive
 
 the `global` keyword is used to make an *identifier* accessible to the linker:
 ```asm
 global _start
 ```
 
-## Labels
+### Labels
 
 the identifier followed by a `:` will create a *label*; labels are used to name locations in the code:
 ```asm
 _start: ; program's entry point
 ```
 
-## `mov` instruction
+### `mov` instruction
 
 ```asm
 mov eax, 1 ; moves int 1 into `eax` register
 mov ebx, 42 ; moves int 42 into `ebx` register
 ```
 
-## Interrupts
+### Interrupts
 
 ```asm
 int 0x80 ; performs an interrupt
@@ -47,14 +49,14 @@ int 0x80 ; performs an interrupt
 - the system call that it makes will be determined by `eax` register (e.g., the value 1 is a `sys_exit` system call)
 - the value stored in `ebx` will be the exit status for the program
 
-## EAX
+### EAX
 
 ```asm
 mov eax, 4      ; `sys_write` sys call
 mov eax, 1      ; `sys_exit` system call
 ```
 
-## EBX
+### EBX
 
 ```asm
 mov ebx, 1      ; `stdout` file descriptor
