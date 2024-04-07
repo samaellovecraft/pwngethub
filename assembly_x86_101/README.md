@@ -144,10 +144,12 @@ section .data
 
 ## Stack
 
-- LIFO data structure
-- is an array
-- has a pointer (register) to the top of it (ESP)
+- LIFO data structure (an array)
+- comprised of elements that are added or removed with 2 operations: push and pop
+- has a pointer to the top of it (ESP) and a pointer to the base of it (EBP)
 - we have random access to its memory, meaning that we can read and write from arbitrary locations within it (see [ex05](ex05/ex05.asm) and [ex06](ex06/ex06.asm))
+
+### push
 
 ```asm
 push 1234
@@ -159,6 +161,8 @@ mov [esp], dword 357    ; push 357
 
 > [!NOTE]
 > `sub esp, 4` effectively allocates 4 bytes on the stack
+
+### pop
 
 ```asm
 push 1234
